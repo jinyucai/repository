@@ -22,7 +22,7 @@ public class SelectSort {
 		long time1 = System.currentTimeMillis(); //纳秒
 		selectSort(arr);
 		long time2 = System.currentTimeMillis();
-		System.out.println("排序耗时" + ((time2-time1)/1000) + "秒");
+		System.out.println("排序耗时" + ((time2-time1)) + "毫秒");
 	}
 	
 	

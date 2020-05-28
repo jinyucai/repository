@@ -9,9 +9,17 @@ import java.util.Arrays;
  */
 public class InsetSort {
 	public static void main(String[] args) {
-		int[] arr = {101, 23, 119, 1};
+//		int[] arr = {101, 23, 119, 1};
+//		insertSort(arr);
+//		System.out.println(Arrays.toString(arr));
+		int[] arr = new int[80000]; //8万个测试时间复杂度
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = (int) (Math.random() * 8000000);
+		}
+		long time1 = System.currentTimeMillis(); //纳秒
 		insertSort(arr);
-		System.out.println(Arrays.toString(arr));
+		long time2 = System.currentTimeMillis();
+		System.out.println("排序耗时" + ((time2-time1)) + "毫秒");
 	}
 
 	public static void insertSort(int[] arr) {
