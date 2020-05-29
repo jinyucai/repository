@@ -76,7 +76,7 @@ class HashTable {
 		int hashId = hashId(id);
 		Emp emp = empArray[hashId].findById(id);
 		if(emp != null) {
-			System.out.println("在第" + hashId+1 + "条链表找到了" + emp.toString());
+			System.out.printf("在第%d条链表找到了%s\n", hashId+1, emp.toString());
 		}
 		return emp;
 	}
@@ -172,10 +172,10 @@ class HashLinkedList {
 	//展示
 	public void list(int no) {
 		if(head == null) {
-			System.out.println("第" + (no+1) + "条链表为空");
+			System.out.printf("第%d条链表为空\n", no+1);
 			return;
 		}
-		System.out.print("第" + (no+1) + "条链表为");
+		System.out.printf("第%d条链表为\n", no+1);
 		Emp temp = head;
 		while(temp != null) {
 			System.out.printf("==>id为%d个员工名称是 %s", temp.getId(), temp.getName());
