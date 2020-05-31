@@ -21,10 +21,22 @@ public class ThreadedBinaryTreeDemo {
         ThreadedBinaryTree threadedBinaryTree = new ThreadedBinaryTree(root);
         //线索化
 //        threadedBinaryTree.threadedBinaryTree();
-        System.out.println(node3.getLeft());
-        System.out.println(node3.getRight());
+//        System.out.println(node3.getLeft());
+//        System.out.println(node3.getRight());
         //输出中序遍历线索化二叉树
 //        threadedBinaryTree.threadInfixOrder();
+        //前序遍历
+//        threadedBinaryTree.preThreadTree(root);
+//        System.out.println(node3.getLeft());
+//        System.out.println(node3.getRight());
+//        threadedBinaryTree.threadOrderPre();
+
+        //后序线索化
+        threadedBinaryTree.postThreadTree(root);
+        System.out.println(node4.getLeft());
+        System.out.println(node4.getRight());
+        System.out.println("后序线索化遍历");
+        threadedBinaryTree.postThreadOrder();
     }
 }
 
@@ -168,6 +180,109 @@ class ThreadedBinaryTree {
         }
     }
 
+    //前序线索化遍历
+    public void threadOrderPre(){
+        if(root == null){
+            return;
+        }
+        System.out.println(root);
+        HeroNode2 node = root;
+        while(node.getRight() != null){
+            if(node.getLeftType() == 0){
+                System.out.println(node.getLeft());
+                node = node.getLeft();
+            }else{
+                System.out.println(node.getRight());
+                node = node.getRight();
+            }
+
+        }
+    }
+
+
+    //前序线索化
+    public void preThreadTree(HeroNode2 node){
+        if(node == null){
+            return;
+        }
+        if(node.getLeft() == null){
+            node.setLeft(pre);
+            node.setLeftType(1);
+        }
+        if(pre != null && pre.getRight() == null){
+            pre.setRight(node);
+            pre.setRightType(1);
+        }
+        pre = node;
+        if(node.getLeftType() == 0){
+            preThreadTree(node.getLeft());
+        }
+        if(node.getRightType() == 0){
+            preThreadTree(node.getRight());
+        }
+
+    }
+
+    /**
+     * 后序线索化遍历
+     */
+    public void postThreadOrder(){
+        if(root == null){
+            return;
+        }
+        HeroNode2 node = root;
+        while(node != null){
+            while (node.getLeftType() == 0){
+                node = node.getLeft();
+            }
+            System.out.println(node);
+            while (node.getRight() != null){
+                if(node.getNextNode() != null){
+                    System.out.println(node.getNextNode());
+                    node = node.getNextNode();
+                }else{
+                    System.out.println(node.getRight());
+                    node = node.getRight();
+                }
+                if(node.getId() == root.getId()){
+                    break;
+                }
+            }
+            break;
+        }
+    }
+
+
+    /**
+     * 后序线索化
+     * @param node
+     */
+    public void postThreadTree(HeroNode2 node){
+        if(node == null){
+            return;
+        }
+
+        postThreadTree(node.getLeft());
+
+        postThreadTree(node.getRight());
+
+        if(node != null && node.getLeft() == null){
+            if(pre != null && pre.getRight() != null && pre.getRight().getRight() == pre && pre.getRight().getRightType() == 1){
+                //后序线索化遍历的连接线
+                pre.setNextNode(node);
+            }
+            node.setLeft(pre);
+            node.setLeftType(1);
+        }
+        if(pre != null && pre.getRight() == null){
+            pre.setRight(node);
+            pre.setRightType(1);
+        }
+
+        pre = node;
+
+    }
+
 }
 
 //二叉树节点
@@ -176,6 +291,7 @@ class HeroNode2 {
     private String name;
     private HeroNode2 left; //左子节点默认为null
     private HeroNode2 right;
+    private HeroNode2 nextNode; //右边下个指针，仅用于后序线索化遍历
     private int leftType; //线索化用的节点状态，0表示该左节点还没有分配,1表示已分配
     private int rightType; //通left
 
@@ -222,6 +338,14 @@ class HeroNode2 {
 
     public void setLeftType(int leftType) {
         this.leftType = leftType;
+    }
+
+    public HeroNode2 getNextNode() {
+        return nextNode;
+    }
+
+    public void setNextNode(HeroNode2 nextNode) {
+        this.nextNode = nextNode;
     }
 
     public int getRightType() {
