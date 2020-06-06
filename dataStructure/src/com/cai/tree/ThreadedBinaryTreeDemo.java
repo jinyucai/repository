@@ -1,7 +1,5 @@
 package com.cai.tree;
 
-import javax.xml.soap.Node;
-
 /**
  * 线索化二叉树
  */
