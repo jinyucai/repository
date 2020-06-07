@@ -9,18 +9,18 @@ import java.util.Arrays;
  */
 public class QuickSort {
 	public static void main(String[] args) {
-		int[] arr = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
-		quickSort(arr, 0, arr.length-1);
-		System.out.println(Arrays.toString(arr));
-		
-//		int[] arr = new int[80000]; //8万个测试时间复杂度
-//		for (int i = 0; i < arr.length; i++) {
-//			arr[i] = (int) (Math.random() * 8000000);
-//		}
-//		long time1 = System.currentTimeMillis(); //纳秒
+//		int[] arr = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
 //		quickSort(arr, 0, arr.length-1);
-//		long time2 = System.currentTimeMillis();
-//		System.out.println("排序耗时" + ((time2-time1)) + "毫秒");
+//		System.out.println(Arrays.toString(arr));
+		
+		int[] arr = new int[8000000]; //8万个测试时间复杂度
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = (int) (Math.random() * 8000000);
+		}
+		long time1 = System.currentTimeMillis(); //纳秒
+		quickSort(arr, 0, arr.length-1);
+		long time2 = System.currentTimeMillis();
+		System.out.println("排序耗时" + ((time2-time1)) + "毫秒");
 	}
 	
 	/**
